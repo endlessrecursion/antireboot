@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">antireboot</string>
+    <string name="action_settings">Settings</string>
+    <string name="disabled_apps">Re-enable Disabled Apps</string>
+	<string name="restart_service">Restart Service</string>
+
+</resources>

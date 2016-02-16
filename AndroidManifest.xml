@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.kryptowire.antireboot"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <!-- The current min SDK is 17 (Jelly Bean) but may be able to go lower -->
+    <uses-sdk
+        android:minSdkVersion="17"
+        android:targetSdkVersion="17" />
+
+    <!-- Required to start after the device completes the boot process -->
+    <!-- Android 4.4.2 - normal -->
+    <!-- Android 5.1.1 - normal -->
+    <!-- Android 6.0 - normal -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    
+    <!-- Required to read the logs to identify attacking apps -->
+    <!-- Android 4.4.2 - signature|system|development -->
+    <!-- Android 5.1.1 - signature|system|development -->
+    <!-- Android 6.0 - signature|system|development -->
+    <uses-permission android:name="android.permission.READ_LOGS" />
+        
+    <!-- Android 4.4.2 - normal -->
+    <!-- Android 5.1.1 - normal -->
+    <!-- Android 6.0 - normal -->
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    
+    <!-- Needed to see which apps are running -->    
+    <!-- Android 4.4.2 - dangerous -->
+    <!-- Android 5.1.1 - normal (deprecated) -->
+    <!-- Android 6.0 - normal (deprecated) -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    
+    <!-- The new GET_TASKS on Lollipop and up -->
+    <!-- Android 5.1.1 - signature|system -->
+    <!-- Android 6.0 - signature|privileged -->
+    <uses-permission android:name="android.permission.REAL_GET_TASKS" />
+    
+    <!-- Required to uninstall attacking apps from the device -->
+    <!-- Android 4.4.2 - signature|system -->
+    <!-- Android 5.1.1 - signature|system -->
+    <!-- Android 6.0 - signature|privileged -->
+    <uses-permission android:name="android.permission.DELETE_PACKAGES" />
+    
+    <!-- Required to get AlarmManager data about alarms -->
+    <!-- Android 4.4.2 - signature|system|development -->
+    <!-- Android 5.1.1 - signature|system|development -->
+    <!-- Android 6.0 - signature|privileged|development -->    
+    <uses-permission android:name="android.permission.DUMP" />
+    
+    <!-- Required to kill apps on the device -->
+    <!-- Android 4.4.2 - signature -->
+    <!-- Android 5.1.1 - signature -->
+    <!-- Android 6.0 - signature -->
+    <uses-permission android:name="android.permission.REMOVE_TASKS" />
+    
+    <!-- Required to kill apps on the device -->    
+    <!-- Android 4.4.2 - signature -->
+    <!-- Android 5.1.1 - signature|system -->
+    <!-- Android 6.0 - signature|privileged -->
+    <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES" />
+    
+    
+    <!-- Required to disable apps on the device -->    
+    <!-- Android 4.4.2 - signature|system -->
+    <!-- Android 5.1.1 - signature|system -->
+    <!-- Android 6.0 - signature|privileged -->
+    <uses-permission android:name="android.permission.CHANGE_COMPONENT_ENABLED_STATE" />
+    
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".AR_MainA"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        
+        <activity android:name=".AR_DisabledAppsList" android:exported="false" />		
+        <service android:name=".AR_DoSDefenseService" android:exported="false" />
+        
+        
+      <receiver android:name=".AR_Receiver">  
+      	<intent-filter android:priority="999">  
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.hardware.usb.action.USB_STATE" />
+          </intent-filter>  
+      </receiver>
+    </application>
+</manifest>
